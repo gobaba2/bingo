@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>BINGO</title>
+        <title>BINGOO</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -92,6 +92,10 @@
             opacity:1 !important;
         }
         </style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3916a2714388385f4a601a0869ea3845d2d2239d
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -112,9 +116,13 @@
                     Bingo
                 </div>
                 <button id="play">JUGAR</button>
-                <div style="display:flex">
+                <div style="display:flex;">
                     @for ($i = 1; $i < 76; $i++)
-                        <div id="{{$i}}" style="">{{ $i }}</div> 
+                        <div id="{{$i}}" style="">
+                            <span>
+                                {{ $i }}
+                            </span>
+                        </div>
                     @endfor
                 </div>
                 <div class="contenedor">
@@ -136,6 +144,7 @@
         src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
         crossorigin="anonymous"></script>
+<<<<<<< HEAD
         <script>
             $('#play').click(function(){
                 document.getElementById("test").style.transition = "transform 700ms  ease-in,opacity 2s"; 
@@ -153,5 +162,25 @@
             });
             
         </script>
+=======
+    <script>
+        $('#play').click(function(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let respuesta=JSON.parse(this.responseText);
+                    var color=["red","blue","green"];
+                    var min=0;
+                    var max=2;
+                    let random = Math.floor(Math.random()*(max-min+1)+min);
+                    document.getElementById(respuesta.numero).style.background = color[random];
+                }
+            };
+            xhttp.open("GET", "numero", true);
+            xhttp.send();
+        });
+
+    </script>
+>>>>>>> 3916a2714388385f4a601a0869ea3845d2d2239d
     </body>
 </html>
