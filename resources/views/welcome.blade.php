@@ -61,8 +61,37 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+ 
         </style>
-        
+        <style>
+        .contenedor{
+            width:500px;
+            height:500px;
+            border:1px solid red;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:blue;
+        }
+        #test {
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:#015b79;
+            font-size:34px;
+            width:100px;
+            height:100px;
+            border-radius:50%;
+            background:rgb(251,251,251);
+            opacity:0;
+            font-weight:bold;
+        }
+        .translate_xy {
+            transform:  translate(-120px, 80px);
+            opacity:1 !important;
+        }
+        </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -72,14 +101,12 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
-
             <div class="content">
                 <div class="title m-b-md">
                     Bingo
@@ -89,6 +116,9 @@
                     @for ($i = 1; $i < 76; $i++)
                         <div id="{{$i}}" style="">{{ $i }}</div> 
                     @endfor
+                </div>
+                <div class="contenedor">
+                    <div id="test"></div>
                 </div>
                 <!-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
@@ -106,23 +136,22 @@
         src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
         crossorigin="anonymous"></script>
-    <script>
-        $('#play').click(function(){
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    let respuesta=JSON.parse(this.responseText);
-                    var color=["red","blue","green"];
-                    var min=0; 
-                    var max=2;  
-                    let random = Math.floor(Math.random()*(max-min+1)+min);
-                    document.getElementById(respuesta.numero).style.background = color[random];
-                }
-            };
-            xhttp.open("GET", "numero", true);
-            xhttp.send();
-        });
-        
-    </script>
+        <script>
+            $('#play').click(function(){
+                document.getElementById("test").style.transition = "transform 700ms  ease-in,opacity 2s"; 
+                $('#test').addClass('translate_xy');
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let respuesta=JSON.parse(this.responseText);
+                        setTimeout('', 5000);
+                        document.getElementById("test").innerHTML=respuesta.numero;
+                    }
+                };
+                xhttp.open("GET", "numero", true);
+                xhttp.send();
+            });
+            
+        </script>
     </body>
 </html>
