@@ -8,14 +8,17 @@ use App\Numbers;
 
 class BingoController extends Controller
 {
-    function save_data(Request $request){
-        $id_game=$request->game_id;
+    function save_data(){
+        $id_game=1;
         // $model_game = new Games();
         $model_number = new Numbers();
-        $array_numbersXgame=$number::find($id_game);
-        $model_number->number=$request->number;
-        $numero_azar= numero_azar($array_numbersXgame);
-        $model_number->game_id=$request->game_id;
+        $array_numbersXgame=$model_number::find($id_game);
+        
+        if($array_numbersXgame==null){
+            $id_game=$this->crear_juego();
+        }
+        $numero_azar= $this->numero_azar($array_numbersXgame);
+        $model_number->game_id=$id_game;
         $model_number->number=$numero_azar;
         $model_number->save();
         $letra="";
@@ -37,12 +40,16 @@ class BingoController extends Controller
     function crear_juego(){
         $model= new Games();
         $model->save();
+        return $model->id;
     }
-    function numero_azar($array_numbersXgame=[0,0]){
+    function numero_azar($array_numbersXgame){
         $min=1;
         $max=75;
         $send=true;
         $numero_azar=rand($min , $max );
+        if($array_numbersXgame==null){
+            return $numero_azar;
+        }
         foreach ($array_numbersXgame as $numbers_in_game) {
             if($numbers_in_game==$numero_azar){
                 numero_azar($array_numbersXgame);

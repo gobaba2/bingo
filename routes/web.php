@@ -20,4 +20,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/numero','BingoController@numero_azar');
+Route::get('/numero','BingoController@save_data');
