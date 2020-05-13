@@ -9,11 +9,10 @@ use App\Numbers;
 class BingoController extends Controller
 {
     function save_data(){
-        $id_game=1;
+        $id_game=3;
         // $model_game = new Games();
         $model_number = new Numbers();
-        $array_numbersXgame=$model_number::find($id_game);
-        
+        $array_numbersXgame=Numbers::where('game_id',$id_game)->get();
         if($array_numbersXgame==null){
             $id_game=$this->crear_juego();
         }
@@ -51,8 +50,8 @@ class BingoController extends Controller
             return $numero_azar;
         }
         foreach ($array_numbersXgame as $numbers_in_game) {
-            if($numbers_in_game==$numero_azar){
-                numero_azar($array_numbersXgame);
+            if($numbers_in_game->number==$numero_azar){
+                $this->numero_azar($array_numbersXgame);
             }
         }
         return $numero_azar;

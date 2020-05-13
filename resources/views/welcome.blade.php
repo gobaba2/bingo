@@ -149,7 +149,7 @@
                     if (this.readyState == 4 && this.status == 200) {
                         let respuesta=JSON.parse(this.responseText);
                         setTimeout('', 5000);
-                        document.getElementById("test").innerHTML=respuesta.numero;
+                        document.getElementById("test").innerHTML=respuesta.letra+' '+respuesta.numero;
                     }
                 };
                 xhttp.open("GET", "numero", true);
