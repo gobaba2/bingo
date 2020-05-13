@@ -38,7 +38,7 @@ class BingoController extends Controller
         $model= new Games();
         $model->save();
     }
-    function numero_azar($array_numbersXgame){
+    function numero_azar($array_numbersXgame=[0,0]){
         $min=1;
         $max=75;
         $send=true;
